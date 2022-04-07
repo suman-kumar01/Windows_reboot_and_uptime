@@ -1,0 +1,23 @@
+---
+- name: Role ensures that the socks tunnel is setup
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+  roles:
+    - role: ansible-role-event-socks-tunnel
+-  name: Pre-Check Step for endpoint
+   hosts: all
+   strategy: free
+   gather_facts: false
+   
+   vars:
+     account_code: "{{ hostvars['localhost']['account_code'] }}"
+     trans_num: "{{ hostvars['localhost']['trans_num'] }}"
+    
+#    vars_files:
+#      - vars/settings.yml
+      
+   roles:
+      - windows_powershell
+      

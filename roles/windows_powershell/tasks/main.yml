@@ -1,0 +1,13 @@
+---
+# - name: execute the script
+#   win_shell: "winrm quickconfig -q -transport:https"
+#   register: output
+#   become_method: runas
+#   become_user: Administrator
+  
+- name: execute the script
+  win_shell: hostname
+  register: output
+  become_method: runas
+  become_user: Administrator
+  

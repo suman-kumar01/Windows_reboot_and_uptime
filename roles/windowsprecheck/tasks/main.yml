@@ -1,0 +1,23 @@
+---
+# Copy the file to remote hosts
+- name: Copy a folder remote hosts
+  win_copy:
+    src: files/Disk_Size.ps1
+    dest: C:\Temp\
+    remote_src: no
+    
+- name: Copy a folder remote hosts
+  win_copy:
+    src: files/AllComputers.txt
+    dest: C:\Temp\
+    remote_src: no
+
+# Execute the file
+- name: installing file on remote host
+  win_shell: .\Disk_Size.ps1
+  args:
+    chdir: C:\Temp\
+  register: ansibleoutput
+  become_method: runas
+  become_user: Administrator
+      

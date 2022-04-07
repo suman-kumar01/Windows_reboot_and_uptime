@@ -1,0 +1,23 @@
+---
+
+- name: reboot the server
+  win_shell: Restart-Computer –delay 15
+  register: Server_reboottime
+
+- name: check uptime of the device
+  win_shell: Get-CimInstance Win32_OperatingSystem | Select-Object LastBootUpTime
+  register: Server_uptime
+  
+- name: debug
+  debug:
+    msg: "{{ Server_uptime.stdout_lines }}"
+
+- name: check the user
+  win_shell: whoami
+  register: user_output
+  
+- name: debug
+  debug:
+    msg: "{{ user_output.stdout_lines }}"  
+  
+  
